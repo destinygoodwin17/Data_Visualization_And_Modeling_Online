@@ -1,0 +1,450 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "03ba50ef-04a5-4edc-9ef8-747de437c608",
+   "metadata": {},
+   "source": [
+    "# Lab Instructions\n",
+    "\n",
+    "Find a dataset that interests you. I'd recommend starting on [Kaggle](https://www.kaggle.com/). Read through all of the material about the dataset and download a .CSV file.\n",
+    "\n",
+    "1. Write a short summary of the data.  Where did it come from?  How was it collected?  What are the features in the data?  Why is this dataset interesting to you?  \n",
+    "\n",
+    "2. Identify 5 interesting questions about your data that you can answer using Pandas methods.  \n",
+    "\n",
+    "3. Answer those questions!  You may use any method you want (including LLMs) to help you write your code; however, you should use Pandas to find the answers.  LLMs will not always write code in this way without specific instruction.  \n",
+    "\n",
+    "4. Write the answer to your question in a text box underneath the code you used to calculate the answer.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c1a579ae-5186-4f4f-b32d-5b186f9ddcd8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "This data set is about detailed information about LEGO sets, parts, colors, and inventories. It was originally collected from Rebrickable which is a website that tracks LEGO pieces and sets, and then uploaded to Kaggle for educational use. Rebrickable gathers information from official LEGO sources, product listings, and community contributions.Its interesting to me because my son loves legos and the history of things so having those intersting make this set interesting. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "02721489-220f-47c1-9914-86e140c9e79e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>set_num</th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>theme_id</th>\n",
+       "      <th>num_parts</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>00-1</td>\n",
+       "      <td>Weetabix Castle</td>\n",
+       "      <td>1970</td>\n",
+       "      <td>414</td>\n",
+       "      <td>471</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>0011-2</td>\n",
+       "      <td>Town Mini-Figures</td>\n",
+       "      <td>1978</td>\n",
+       "      <td>84</td>\n",
+       "      <td>12</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>0011-3</td>\n",
+       "      <td>Castle 2 for 1 Bonus Offer</td>\n",
+       "      <td>1987</td>\n",
+       "      <td>199</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>0012-1</td>\n",
+       "      <td>Space Mini-Figures</td>\n",
+       "      <td>1979</td>\n",
+       "      <td>143</td>\n",
+       "      <td>12</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>0013-1</td>\n",
+       "      <td>Space Mini-Figures</td>\n",
+       "      <td>1979</td>\n",
+       "      <td>143</td>\n",
+       "      <td>12</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  set_num                        name  year  theme_id  num_parts\n",
+       "0    00-1             Weetabix Castle  1970       414        471\n",
+       "1  0011-2           Town Mini-Figures  1978        84         12\n",
+       "2  0011-3  Castle 2 for 1 Bonus Offer  1987       199          2\n",
+       "3  0012-1          Space Mini-Figures  1979       143         12\n",
+       "4  0013-1          Space Mini-Figures  1979       143         12"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "df = pd.read_csv('sets.csv')\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d401243d-3bc5-4048-a946-5f3029c144e9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "How has the number of LEGO sets changed over time?\n",
+    "What are the most common LEGO themes?\n",
+    "What year had the most LEGO sets released?\n",
+    "What are the largest LEGO sets (by number of parts)?\n",
+    "What is the average number of parts per set?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "1d99f77b-03c6-4dc8-a640-bac8d38fea68",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "year\n",
+       "1950      7\n",
+       "1953      4\n",
+       "1954     14\n",
+       "1955     28\n",
+       "1956     12\n",
+       "       ... \n",
+       "2013    593\n",
+       "2014    713\n",
+       "2015    665\n",
+       "2016    596\n",
+       "2017    296\n",
+       "Name: count, Length: 66, dtype: int64"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "sets_per_year = df['year'].value_counts().sort_index()\n",
+    "sets_per_year"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "76882eb0-0b3b-46b9-bf25-ea2798e06648",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "The number of LEGO sets has generally increased over time. Earlier years had fewer sets but in more recent years, there has been a show of significant rise in production, showing that LEGO has expanded its products over time."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "c7bdc255-2ea6-4990-8670-79ab2dbc1573",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "name_y\n",
+       "Supplemental     496\n",
+       "Technic          435\n",
+       "City             287\n",
+       "Friends          269\n",
+       "Basic Set        257\n",
+       "Creator          249\n",
+       "Gear             246\n",
+       "Service Packs    242\n",
+       "Duplo            219\n",
+       "Star Wars        211\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "themes = pd.read_csv('themes.csv')\n",
+    "\n",
+    "merged = df.merge(themes, left_on='theme_id', right_on='id')\n",
+    "\n",
+    "merged['name_y'].value_counts().head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ee2da064-f91b-4e1e-9e93-5cded3d49eb5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "The most common LEGO themes include Supplemental, Technic, and City. These themes appear most frequently in the dataset, suggesting they are among LEGO’s most popular and widely produced categories"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "078c1a97-c583-486a-a07f-2d051ba727de",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The year with the most LEGO sets released was 2014.\n"
+     ]
+    }
+   ],
+   "source": [
+    "top_year = df['year'].value_counts().idxmax()\n",
+    "\n",
+    "print(f\"The year with the most LEGO sets released was {top_year}.\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "4dce2904-9712-40c3-bc36-f708cd3ca96b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "The year with the highest number of LEGO sets released was 2014"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "d7f753ff-6b95-4004-98d9-b3bf21d88d22",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>num_parts</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>170</th>\n",
+       "      <td>Taj Mahal</td>\n",
+       "      <td>2008</td>\n",
+       "      <td>5922</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11614</th>\n",
+       "      <td>Star Wars / M&amp;M Mosaic - Promo Set</td>\n",
+       "      <td>2005</td>\n",
+       "      <td>5461</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1337</th>\n",
+       "      <td>Window Exploration Bag</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>5200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>161</th>\n",
+       "      <td>Millennium Falcon - UCS</td>\n",
+       "      <td>2007</td>\n",
+       "      <td>5195</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8322</th>\n",
+       "      <td>Firehouse Headquarters</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>4640</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3163</th>\n",
+       "      <td>Personalised Mosaic Portrait</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>4501</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>195</th>\n",
+       "      <td>Tower Bridge</td>\n",
+       "      <td>2010</td>\n",
+       "      <td>4295</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>234</th>\n",
+       "      <td>Big Ben</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>4166</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7606</th>\n",
+       "      <td>The Disney Castle</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>4060</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8167</th>\n",
+       "      <td>Death Star</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>4023</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                     name  year  num_parts\n",
+       "170                             Taj Mahal  2008       5922\n",
+       "11614  Star Wars / M&M Mosaic - Promo Set  2005       5461\n",
+       "1337               Window Exploration Bag  2010       5200\n",
+       "161               Millennium Falcon - UCS  2007       5195\n",
+       "8322               Firehouse Headquarters  2016       4640\n",
+       "3163         Personalised Mosaic Portrait  2016       4501\n",
+       "195                          Tower Bridge  2010       4295\n",
+       "234                               Big Ben  2016       4166\n",
+       "7606                    The Disney Castle  2016       4060\n",
+       "8167                           Death Star  2016       4023"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.sort_values(by='num_parts', ascending=False)[['name', 'year', 'num_parts']].head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c790c484-16e3-44bb-b5c5-4e69fc886741",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "he largest LEGO set is the Taj Mahal pieces with 5922 pieces, which have the highest number of parts in the dataset."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "cbbade4d-947c-4f34-98dc-47055ce14e19",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The average number of parts per LEGO set is 162.26 pieces.\n"
+     ]
+    }
+   ],
+   "source": [
+    "avg_parts = df['num_parts'].mean()\n",
+    "\n",
+    "print(f\"The average number of parts per LEGO set is {avg_parts:.2f} pieces.\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "53994daa-cc6f-470d-9e0b-3d53a3f5e600",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "The average number of parts per LEGO set is 162.26 pieces."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:anaconda4]",
+   "language": "python",
+   "name": "conda-env-anaconda4-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
